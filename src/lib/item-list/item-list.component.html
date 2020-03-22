@@ -1,0 +1,23 @@
+<div>
+  <ng-template #defaultEdit>
+    edit
+  </ng-template>
+  <ng-template #defaultTrash>
+    trash
+  </ng-template>
+  <div [ngClass]="{'active':(result)}" class="options-btn swipe-d-flex justify-content-between {{itemClass}}">
+    <div (click)="action('edit')" class="option-list">
+      <ng-container #viewContainerEdit></ng-container>
+    </div>
+    <div (click)="action('trash')" class="option-list">
+      <ng-container #viewContainerTrash></ng-container>
+    </div>
+  </div>
+  <div [ngClass]="{'left-swipe':(result)}" class="list-swipe swipe-d-flex">
+    <div class="swipe-w-100">
+      <div class="text truncate">{{inside?.title}}</div>
+      <div class="small truncate">{{inside?.subTitle}}</div>
+    </div>
+    <div class="mark"></div>
+  </div>
+</div>
