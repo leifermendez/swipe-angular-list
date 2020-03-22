@@ -104,7 +104,7 @@ export class AppComponent {
 ### Options
 
 __item__ structure defined :
-```json
+``` text
    {
       id: 1,
       title: 'Realizar la tarea asignada!',
