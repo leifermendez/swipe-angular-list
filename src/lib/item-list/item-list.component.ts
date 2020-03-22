@@ -30,8 +30,11 @@ export class ItemListComponent implements AfterViewInit {
   @Input() inside: {
     id,
     title: '',
-    subTitle: ''
+    subTitle: '',
+    mark: false
   };
+
+  @Input('show-mark') showMark = false;
 
   @Input('item-class') itemClass = '';
 
@@ -40,10 +43,20 @@ export class ItemListComponent implements AfterViewInit {
   // @ts-ignore
   @ViewChild('defaultTrash') defaultTrash: TemplateRef<any>;
 
+  // @ts-ignore
+  @ViewChild('defaultMark') defaultMark: TemplateRef<any>;
+  // @ts-ignore
+  @ViewChild('defaultNotMark') defaultNotMark: TemplateRef<any>;
+
   // tslint:disable-next-line:no-input-rename
   @Input('editTemplate') editTemplate: TemplateRef<any>;
   // tslint:disable-next-line:no-input-rename
   @Input('trashTemplate') trashTemplate: TemplateRef<any>;
+
+  // tslint:disable-next-line:no-input-rename
+  @Input('markTemplate') markTemplate: TemplateRef<any>;
+  // tslint:disable-next-line:no-input-rename
+  @Input('notMarkTemplate') notMarkTemplate: TemplateRef<any>;
 
   @Output()
   callback = new EventEmitter<any>();
@@ -53,6 +66,9 @@ export class ItemListComponent implements AfterViewInit {
 
   @ViewChild('viewContainerTrash', {static: false, read: ViewContainerRef})
   viewContainerTrash: ViewContainerRef;
+
+  @ViewChild('viewContainerMark', {static: false, read: ViewContainerRef})
+  viewContainerMark: ViewContainerRef;
 
   // @ViewChild('tpl') tpl: TemplateRef<any>
 
@@ -103,6 +119,23 @@ export class ItemListComponent implements AfterViewInit {
   };
 
   ngAfterViewInit(): void {
+    if (this.showMark) {
+      if (this.inside.mark && !this.markTemplate) {
+        const viewMark = this.defaultMark.createEmbeddedView(null);
+        this.viewContainerMark.insert(viewMark);
+      } else if (this.inside.mark && this.markTemplate) {
+        const viewMark = this.markTemplate.createEmbeddedView(null);
+        this.viewContainerMark.insert(viewMark);
+      }
+
+      if (!this.inside.mark && !this.notMarkTemplate) {
+        const viewMark = this.defaultNotMark.createEmbeddedView(null);
+        this.viewContainerMark.insert(viewMark);
+      } else if (!this.inside.mark && this.notMarkTemplate) {
+        const viewMark = this.notMarkTemplate.createEmbeddedView(null);
+        this.viewContainerMark.insert(viewMark);
+      }
+    }
 
     if (this.editTemplate) {
       const viewEdit = this.editTemplate.createEmbeddedView(null);

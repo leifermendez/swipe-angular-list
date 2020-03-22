@@ -5,6 +5,12 @@
   <ng-template #defaultTrash>
     trash
   </ng-template>
+  <ng-template #defaultMark>
+    <div class="yes-marker"></div>
+  </ng-template>
+  <ng-template #defaultNotMark>
+    <div class="not-marker"></div>
+  </ng-template>
   <div [ngClass]="{'active':(result)}" class="options-btn swipe-d-flex justify-content-between">
     <div (click)="action('edit')" class="option-list">
       <ng-container #viewContainerEdit></ng-container>
@@ -14,7 +20,10 @@
     </div>
   </div>
   <div [ngClass]="{'left-swipe':(result)}" class="list-swipe swipe-d-flex">
-    <div class="swipe-w-100">
+    <div *ngIf="showMark" class="swipe-w-10">
+      <ng-container #viewContainerMark></ng-container>
+    </div>
+    <div [ngClass]="{'swipe-w-90':showMark, 'swipe-w-100':!showMark}">
       <div class="text truncate">{{inside?.title}}</div>
       <div class="small truncate">{{inside?.subTitle}}</div>
     </div>

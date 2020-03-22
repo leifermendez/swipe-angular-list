@@ -11,7 +11,7 @@ You can now have a swipe effect on your angle application, with which you can pl
 `npm i swipe-angular-list --save`
 
 ### Import
-```json
+```typescript
 import {BrowserModule} from '@angular/platform-browser';  
 import {NgModule} from '@angular/core';  
 import {AppComponent} from './app.component';  
@@ -35,7 +35,7 @@ export class AppModule {
 
 ### Use
 Use in your component
-```json
+```typescript
 import { Component } from '@angular/core';  
   
 @Component({  

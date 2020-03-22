@@ -2,15 +2,30 @@
   display: block;
   font-family: "Arial", serif;
 }
-
+.not-marker{
+  background: red;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 3rem;
+}
+.yes-marker{
+  background: green;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 3rem;
+}
 .swipe-d-flex {
   display: flex;
 }
-
+.swipe-w-10 {
+  width: 10%;
+}
 .swipe-w-100 {
   width: 100%;
 }
-
+.swipe-w-90 {
+  width: 90%;
+}
 .options-btn.active{
   display: flex;
   transform: translate(66vw, 0px) !important;
