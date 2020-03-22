@@ -101,3 +101,40 @@ export class AppComponent {
  <i class="fas fa-trash"></i>  
 </ng-template>
 ```
+### Options
+
+__item__ structure defined :
+```json
+   {
+      id: 1,
+      title: 'Realizar la tarea asignada!',
+      subTitle: '9:00pm'
+    }
+```
+__item-class__ name of style class custom.
+
+__show-mark__ boolean show icon done or not
+
+__editTemplate__ template for edit button
+
+__trashTemplate__ template for trash button
+
+__markTemplate__ template for icon check template
+
+__notMarkTemplate__ template for icon not check template
+
+__(callback)__ function callback click option
+
+``` html
+    <sw-item-list
+      *ngFor="let item of list"
+      [inside]="item"
+      [item-class]="'list-custom'"
+      [show-mark]="true"
+      [editTemplate]="editTemplate"
+      [trashTemplate]="trashTemplate"
+      [markTemplate]="defaultMark"
+      [notMarkTemplate]="defaultNotMark"
+      (callback)="action($event)">
+    </sw-item-list>
+```
