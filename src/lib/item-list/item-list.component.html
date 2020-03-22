@@ -1,11 +1,11 @@
-<div>
+<div class="{{itemClass}}">
   <ng-template #defaultEdit>
     edit
   </ng-template>
   <ng-template #defaultTrash>
     trash
   </ng-template>
-  <div [ngClass]="{'active':(result)}" class="options-btn swipe-d-flex justify-content-between {{itemClass}}">
+  <div [ngClass]="{'active':(result)}" class="options-btn swipe-d-flex justify-content-between">
     <div (click)="action('edit')" class="option-list">
       <ng-container #viewContainerEdit></ng-container>
     </div>
