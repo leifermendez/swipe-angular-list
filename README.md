@@ -1,24 +1,103 @@
-# SwipeAngularList
+# Swiper List (Angular)
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.0.
+You can now have a swipe effect on your angle application, with which you can place delete or edit options. Ideal for task list or contacts
 
-## Code scaffolding
+<p align="center">
+    <img src="https://i.imgur.com/qMXkbXm.gif" alt="Preview" />
+</p>
 
-Run `ng generate component component-name --project swipe-angular-list` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project swipe-angular-list`.
-> Note: Don't forget to add `--project swipe-angular-list` or else it will be added to the default project in your `angular.json` file. 
 
-## Build
+### Install
+`npm i swipe-angular-list --save`
 
-Run `ng build swipe-angular-list` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Import
+```json
+import {BrowserModule} from '@angular/platform-browser';  
+import {NgModule} from '@angular/core';  
+import {AppComponent} from './app.component';  
 
-## Publishing
+import {SwipeAngularListModule} from 'swipe-angular-list';  // <------ IMPORT
+  
+@NgModule({  
+  declarations: [  
+    AppComponent  
+  ],  
+  imports: [  
+    BrowserModule,  
+  SwipeAngularListModule   // <------ IMPORT
+  ],  
+  providers: [],  
+  bootstrap: [AppComponent]  
+})  
+export class AppModule {  
+}
+```
 
-After building your library with `ng build swipe-angular-list`, go to the dist folder `cd dist/swipe-angular-list` and run `npm publish`.
+### Use
+Use in your component
+```json
+import { Component } from '@angular/core';  
+  
+@Component({  
+  selector: 'app-root',  
+  templateUrl: './app.component.html',  
+  styleUrls: ['./app.component.css']  
+})  
+export class AppComponent {  
+  title = 'for-test';  
+  list = [  
+      {  
+		  id: 1,  
+		  title: 'Realizar la tarea asignada!',  
+		  subTitle: '9:00pm'  
+	  },  
+	  {  
+		  id: 2,  
+		  title: 'Visitar al perro en casa de tu amiga',  
+		  subTitle: '9:00pm'  
+	  },  
+	  {  
+		  id: 3,  
+		  title: 'Llamar al doctor',  
+		  subTitle: '9:00pm'  
+	  },  
+	  {  
+		  id: 4,  
+		  title: 'Buscar el auto en el taller',  
+		  subTitle: '9:00pm'  
+	  }  
+    ];  
+  
+  
+  action = (a) => {  
+      console.log(a);  
+  };  
+}
+```
 
-## Running unit tests
+### Template
+```html
+<div>  
 
-Run `ng test swipe-angular-list` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+ <h3 style="text-align: center">Task List</h3>  
+ 
+ <div> <sw-item-list  *ngFor="let item of list"  
+  [inside]="item"  
+  [item-class]="'list-custom'"  
+  [editTemplate]="editTemplate"  
+  [trashTemplate]="trashTemplate"  
+  (callback)="action($event)">  
+  
+ </sw-item-list>  
+ </div>
+ </div>  
+ 
+ !<-- Defined yout template for icon button (edit)-->
+<ng-template #editTemplate>  
+ <i class="fas fa-edit"></i>  
+</ng-template>  
+ !<-- Defined yout template for icon button (trash)-->
+<ng-template #trashTemplate>  
+ <i class="fas fa-trash"></i>  
+</ng-template>
+```

@@ -28,8 +28,7 @@ export class ItemListComponent implements AfterViewInit {
   result: boolean;
   selfElement = null;
   @Input() inside: {
-    edit,
-    trash,
+    id,
     title: '',
     subTitle: ''
   };
@@ -92,11 +91,11 @@ export class ItemListComponent implements AfterViewInit {
   action = (opt = '') => {
     try {
       this.result = false;
-      const {edit, trash} = this.inside;
+      const {id} = this.inside;
       if (opt === 'edit') {
-        this.callback.emit({action: 'edit', value: edit});
+        this.callback.emit({action: 'edit', value: id});
       } else if (opt === 'trash') {
-        this.callback.emit({action: 'trash', value: trash});
+        this.callback.emit({action: 'trash', value: id});
       }
     } catch (e) {
       console.log('Debes definir ID de edit, y trash');
