@@ -38,8 +38,6 @@ export class ItemListComponent implements AfterViewInit {
 
   @Input('item-class') itemClass = '';
 
-  @Input('swiHref') swiHref = [];
-
   // @ts-ignore
   @ViewChild('defaultEdit') defaultEdit: TemplateRef<any>;
   // @ts-ignore
@@ -62,6 +60,9 @@ export class ItemListComponent implements AfterViewInit {
 
   @Output()
   callback = new EventEmitter<any>();
+
+  @Output()
+  swClick = new EventEmitter<any>();
 
   @ViewChild('viewContainerEdit', {static: false, read: ViewContainerRef})
   viewContainerEdit: ViewContainerRef;
@@ -105,6 +106,8 @@ export class ItemListComponent implements AfterViewInit {
     });
 
   };
+
+  clickItem = (a: any) => this.swClick.emit(a);
 
   action = (opt = '') => {
     try {

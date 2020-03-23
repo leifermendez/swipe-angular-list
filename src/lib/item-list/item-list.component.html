@@ -23,7 +23,7 @@
     <div *ngIf="showMark" class="swipe-w-10">
       <ng-container #viewContainerMark></ng-container>
     </div>
-    <div [routerLink]="(swiHref) ? swiHref : []" [ngClass]="{'swipe-w-90':showMark, 'swipe-w-100':!showMark}">
+    <div (click)="clickItem($event)" [ngClass]="{'swipe-w-90':showMark, 'swipe-w-100':!showMark}">
       <div class="text truncate">{{inside?.title}}</div>
       <div class="small truncate">{{inside?.subTitle}}</div>
     </div>

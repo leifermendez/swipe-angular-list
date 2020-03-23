@@ -125,7 +125,7 @@ __notMarkTemplate__ template for icon not check template
 
 __(callback)__ function callback click option
 
-__(swiHref)__ router for navigation
+__(swClick)__ click on item
 
 ``` html
     <sw-item-list
@@ -133,7 +133,7 @@ __(swiHref)__ router for navigation
       [inside]="item"
       [item-class]="'list-custom'"
       [show-mark]="true"
-      [swiHref]="['/','route']"
+      (swClick)="click(item)"
       [editTemplate]="editTemplate"
       [trashTemplate]="trashTemplate"
       [markTemplate]="defaultMark"
