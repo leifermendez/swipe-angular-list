@@ -125,12 +125,15 @@ __notMarkTemplate__ template for icon not check template
 
 __(callback)__ function callback click option
 
+__(swiHref)__ router for navigation
+
 ``` html
     <sw-item-list
       *ngFor="let item of list"
       [inside]="item"
       [item-class]="'list-custom'"
       [show-mark]="true"
+      [swiHref]="['/','route']"
       [editTemplate]="editTemplate"
       [trashTemplate]="trashTemplate"
       [markTemplate]="defaultMark"

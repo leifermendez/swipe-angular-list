@@ -38,6 +38,8 @@ export class ItemListComponent implements AfterViewInit {
 
   @Input('item-class') itemClass = '';
 
+  @Input('swiHref') swiHref = [];
+
   // @ts-ignore
   @ViewChild('defaultEdit') defaultEdit: TemplateRef<any>;
   // @ts-ignore
