@@ -27,12 +27,15 @@ export class ItemListComponent implements AfterViewInit {
   alive = true;
   result: boolean;
   selfElement = null;
+  idElement = null;
   @Input() inside: {
     id,
     title: '',
     subTitle: '',
-    mark: false
+    mark: false,
   };
+
+  @Input('disable-mark') disabledMark = false;
 
   @Input('show-mark') showMark = false;
 
@@ -84,7 +87,9 @@ export class ItemListComponent implements AfterViewInit {
 
   constructor(elRef: ElementRef, private swService: SwipeServiceService) {
     this.selfElement = elRef.nativeElement;
-    this.selfElement.id = `list-swipe-${this.random()}`;
+    this.idElement = `list-swipe-${this.random()}`;
+    this.selfElement.setAttribute('data-id', this.idElement);
+    this.selfElement.id = this.idElement;
     this.swService.swipeObserver.subscribe(a => {
       if (a !== this.selfElement.id) {
         this.result = false;
@@ -167,13 +172,15 @@ export class ItemListComponent implements AfterViewInit {
       takeWhile(() => this.alive))
       .subscribe((res: any) => {
         this.swService.closeAll(this.selfElement.id);
-        this.getParent(res.srcEvent.path).then(a => {
-          if (a === this.selfElement.id) {
-            this.result = res.deltaX < 0;
-          } else {
-            this.result = false;
+        if (!this.disabledMark) {
+          // @ts-ignore disabledMark
+          const {id} = Object.values(res.srcEvent.target.parentNode.children).find(b => true);
+          if (id && (typeof id === 'string') && (/list-swipe/.test(id))) {
+            if (id === this.selfElement.id) {
+              this.result = (res.deltaX < 0);
+            }
           }
-        });
+        }
       });
   }
 
