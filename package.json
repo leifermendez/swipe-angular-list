@@ -1,6 +1,6 @@
 {
   "name": "swipe-angular-list",
-  "version": "0.1.2",
+  "version": "0.1.5",
   "peerDependencies": {
     "@angular/common": "^8.2.0",
     "@angular/core": "^8.2.0",

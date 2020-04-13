@@ -180,19 +180,21 @@ export class ItemListComponent implements AfterViewInit {
           item: this.inside,
           id: this.selfElement.id
         });
-
         // @ts-ignore
-        viewCustomTemplate._view.nodes.map(e => {
-          if (e && e.renderElement && e.renderElement.attributes) {
-            // console.log(renderElement.childNodes)
-
-            Object.keys(e.renderElement.childNodes).map(r => {
-              // tslint:disable-next-line:radix
-              e.renderElement.childNodes[parseInt(r)].id = this.selfElement.id;
+        if (viewCustomTemplate && viewCustomTemplate.rootNodes) {
+          // @ts-ignore
+          viewCustomTemplate.rootNodes.map(e => {
+            e.id = this.selfElement.id;
+            e.children[0].childNodes.forEach(b => {
+              if (b) {
+                b.id = this.selfElement.id;
+                if (b.children.length) {
+                  b.children[0].id = this.selfElement.id;
+                }
+              }
             });
-
-          }
-        });
+          });
+        }
 
         if (viewCustomTemplate) {
           this.viewContainerCustom.insert(viewCustomTemplate);
@@ -201,7 +203,7 @@ export class ItemListComponent implements AfterViewInit {
         const viewCustomTemplate = this.defaultCustom.createEmbeddedView(null);
         this.viewContainerCustom.insert(viewCustomTemplate);
       }
-    });
+    }, 50);
 
 
     const hammer = new Hammer(this.selfElement);
