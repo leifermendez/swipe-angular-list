@@ -50,12 +50,15 @@ export class ItemListComponent implements AfterViewInit {
   @ViewChild('defaultMark') defaultMark: TemplateRef<any>;
   // @ts-ignore
   @ViewChild('defaultNotMark') defaultNotMark: TemplateRef<any>;
+  // @ts-ignore
+  @ViewChild('defaultCustom') defaultCustom: TemplateRef<any>;
 
+  // tslint:disable-next-line:no-input-rename
+  @Input('customTemplate') customTemplate: TemplateRef<any>;
   // tslint:disable-next-line:no-input-rename
   @Input('editTemplate') editTemplate: TemplateRef<any>;
   // tslint:disable-next-line:no-input-rename
   @Input('trashTemplate') trashTemplate: TemplateRef<any>;
-
   // tslint:disable-next-line:no-input-rename
   @Input('markTemplate') markTemplate: TemplateRef<any>;
   // tslint:disable-next-line:no-input-rename
@@ -75,6 +78,9 @@ export class ItemListComponent implements AfterViewInit {
 
   @ViewChild('viewContainerMark', {static: false, read: ViewContainerRef})
   viewContainerMark: ViewContainerRef;
+
+  @ViewChild('viewContainerCustom', {static: false, read: ViewContainerRef})
+  viewContainerCustom: ViewContainerRef;
 
   // @ViewChild('tpl') tpl: TemplateRef<any>
 
@@ -129,6 +135,7 @@ export class ItemListComponent implements AfterViewInit {
   };
 
   ngAfterViewInit(): void {
+
     if (this.showMark) {
       if (this.inside.mark && !this.markTemplate) {
         const viewMark = this.defaultMark.createEmbeddedView(null);
@@ -152,7 +159,7 @@ export class ItemListComponent implements AfterViewInit {
       if (this.viewContainerEdit) {
         this.viewContainerEdit.insert(viewEdit);
       }
-    } else {
+    } else if (this.editTemplate !== null) {
       const viewEdit = this.defaultEdit.createEmbeddedView(null);
       this.viewContainerEdit.insert(viewEdit);
     }
@@ -162,10 +169,40 @@ export class ItemListComponent implements AfterViewInit {
       if (this.viewContainerTrash) {
         this.viewContainerTrash.insert(viewTrash);
       }
-    } else {
+    } else if (this.trashTemplate !== null) {
       const viewTrash = this.defaultTrash.createEmbeddedView(null);
       this.viewContainerTrash.insert(viewTrash);
     }
+
+    setTimeout(() => {
+      if (this.customTemplate) { // Si tiene
+        const viewCustomTemplate = this.customTemplate.createEmbeddedView({
+          item: this.inside,
+          id: this.selfElement.id
+        });
+
+        // @ts-ignore
+        viewCustomTemplate._view.nodes.map(e => {
+          if (e && e.renderElement && e.renderElement.attributes) {
+            // console.log(renderElement.childNodes)
+
+            Object.keys(e.renderElement.childNodes).map(r => {
+              // tslint:disable-next-line:radix
+              e.renderElement.childNodes[parseInt(r)].id = this.selfElement.id;
+            });
+
+          }
+        });
+
+        if (viewCustomTemplate) {
+          this.viewContainerCustom.insert(viewCustomTemplate);
+        }
+      } else {
+        const viewCustomTemplate = this.defaultCustom.createEmbeddedView(null);
+        this.viewContainerCustom.insert(viewCustomTemplate);
+      }
+    });
+
 
     const hammer = new Hammer(this.selfElement);
     fromEvent(hammer, 'swipe').pipe(
@@ -173,7 +210,7 @@ export class ItemListComponent implements AfterViewInit {
       .subscribe((res: any) => {
         this.swService.closeAll(this.selfElement.id);
         if (!this.disabledMark) {
-          // @ts-ignore disabledMark
+          // @ts-ignore
           const {id} = Object.values(res.srcEvent.target.parentNode.children).find(b => true);
           if (id && (typeof id === 'string') && (/list-swipe/.test(id))) {
             if (id === this.selfElement.id) {

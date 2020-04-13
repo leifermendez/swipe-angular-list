@@ -11,21 +11,38 @@
   <ng-template #defaultNotMark>
     <div class="not-marker"></div>
   </ng-template>
-  <div [ngClass]="{'active':(result)}" data-id="{{idElement}}" class=" options-btn swipe-d-flex justify-content-between">
-    <div (click)="action('edit')" class="option-list">
-      <ng-container #viewContainerEdit></ng-container>
+
+  <ng-template #defaultCustom>
+    <div data-id="{{idElement}}" class="text truncate">{{inside?.title}}</div>
+    <div data-id="{{idElement}}" class="small truncate">{{inside?.subTitle}}</div>
+  </ng-template>
+
+
+  <div [ngClass]="{'active':(result)}" data-id="{{idElement}}"
+       class=" options-btn swipe-d-flex justify-content-between">
+    <div (click)="action('edit')" class="option-list" *ngIf="editTemplate !== null">
+      <ng-template let-show="show" #viewContainerEdit></ng-template>
     </div>
-    <div (click)="action('trash')" class="option-list">
-      <ng-container #viewContainerTrash></ng-container>
+    <div (click)="action('trash')" class="option-list" *ngIf="trashTemplate !== null">
+      <ng-template let-show="show" #viewContainerTrash></ng-template>
     </div>
   </div>
-  <div [ngClass]="{'left-swipe':(result)}" data-id="{{idElement}}"  class="list-swipe swipe-d-flex">
+  <div [ngClass]="{'left-swipe':(result)}" data-id="{{idElement}}" class="list-swipe swipe-d-flex">
+
     <div *ngIf="showMark" class="swipe-w-10">
       <ng-container #viewContainerMark></ng-container>
     </div>
+
     <div (click)="clickItem($event)" [ngClass]="{'swipe-w-90':showMark, 'swipe-w-100':!showMark}">
-      <div data-id="{{idElement}}"  class="text truncate">{{inside?.title}}</div>
-      <div data-id="{{idElement}}"  class="small truncate">{{inside?.subTitle}}</div>
+      <div *ngIf="customTemplate" data-id="{{idElement}}">
+        <ng-template #viewContainerCustom>
+        </ng-template>
+      </div>
+
+      <div *ngIf="!customTemplate">
+        <ng-template #viewContainerCustom></ng-template>
+      </div>
+
     </div>
     <div class="mark"></div>
   </div>
