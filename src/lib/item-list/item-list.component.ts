@@ -176,8 +176,9 @@ export class ItemListComponent implements AfterViewInit {
 
     setTimeout(() => {
       if (this.customTemplate) { // Si tiene
+        const dataInside = {...this.inside, ...{touch: this.selfElement.id}};
         const viewCustomTemplate = this.customTemplate.createEmbeddedView({
-          item: this.inside,
+          item: dataInside,
           id: this.selfElement.id
         });
         // @ts-ignore
@@ -211,9 +212,12 @@ export class ItemListComponent implements AfterViewInit {
       takeWhile(() => this.alive))
       .subscribe((res: any) => {
         this.swService.closeAll(this.selfElement.id);
+
         if (!this.disabledMark) {
           // @ts-ignore
           const {id} = Object.values(res.srcEvent.target.parentNode.children).find(b => true);
+          const parentObject = Object.values(res.srcEvent.target.parentNode.children).find(b => true);
+          console.log(parentObject);
           if (id && (typeof id === 'string') && (/list-swipe/.test(id))) {
             if (id === this.selfElement.id) {
               this.result = (res.deltaX < 0);

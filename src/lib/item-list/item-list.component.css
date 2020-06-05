@@ -28,7 +28,7 @@
 }
 .options-btn.active{
   display: flex;
-  transform: translate(66vw, 0px) !important;
+  transform: translate(66vw, 0px);
 }
 
 .list-swipe {
