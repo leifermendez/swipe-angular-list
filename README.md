@@ -1,4 +1,7 @@
 
+![](https://img.shields.io/npm/dy/swipe-angular-list.svg)
+![](https://img.shields.io/github/stars/leifermendez/swipe-angular-list)
+![](https://img.shields.io/github/license/leifermendez/swipe-angular-list)
 # Swiper List (Angular)
 
   
