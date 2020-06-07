@@ -4,11 +4,17 @@
   
 
 You can now have a swipe effect on your angle application, with which you can place delete or edit options. Ideal for task list or contacts
-
+<p  align="center">
 <small>Preview</small>
-  ![](https://i.imgur.com/WGotbov.png)
----
-<p  align="center" style="display:flex;justify-content: space-between;width:100%">
+<br>
+<img src="https://i.imgur.com/WGotbov.png"  alt="Preview 1" />
+</p>
+
+----
+
+<p  align="center" style="display:flex;justify-content: space-between;width:100%;align-content: center;">
+<b>Examples</b>
+
 <img height="400" src="https://i.imgur.com/qMXkbXm.gif"  alt="Preview 1" />
 <img height="400" src="https://i.imgur.com/LspDKT6.gif"  alt="Preview 2" />
 <img height="400" src="https://i.imgur.com/orpXyIv.gif"  alt="Preview 3" />
