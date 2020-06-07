@@ -6,7 +6,7 @@
 
   
 
-You can now have a swipe effect on your angle application, with which you can place delete or edit options. Ideal for task list or contacts.
+You can now have a swipe effect on your Angular application, with which you can place delete or edit options. Ideal for task list or contacts.
 
 __[DEMO](https://stackblitz.com/edit/angular-ejzvpz)__
 
