@@ -1,6 +1,6 @@
 {
   "name": "swipe-angular-list",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "peerDependencies": {
     "@angular/common": "^8.2.0",
     "@angular/core": "^8.2.0",
@@ -24,7 +24,8 @@
   ],
   "author": {
     "name": "Leifer Mendez",
-    "email": "leifer33@gmail.com"
+    "email": "leifer33@gmail.com",
+    "url": "https://leifermendez.github.io"
   },
   "contributors": [
     { "name" : "Daniel Lopéz"

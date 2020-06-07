@@ -10,12 +10,6 @@ import {
   TemplateRef,
   ViewChild, ViewContainerRef
 } from '@angular/core';
-import {
-  HammerGestureConfig,
-} from '@angular/platform-browser';
-import {fromEvent} from 'rxjs';
-import {takeWhile} from 'rxjs/operators';
-import * as Hammer from 'hammerjs';
 import {SwipeServiceService} from '../swipe-service.service';
 
 @Component({
@@ -118,6 +112,26 @@ export class ItemListComponent implements AfterViewInit {
 
   };
 
+  public swipeleft = (res:any) => {
+    this.swService.closeAll(this.selfElement.id);
+    this.result = (res.deltaX < 0);
+
+    /**
+     * Old CODE
+     */
+    // if (!this.disabledMark) {
+    //   // @ts-ignore
+    //   const {id} = Object.values(res.srcEvent.target.parentNode.children).find(b => true);
+    //   const parentObject = Object.values(res.srcEvent.target.parentNode.children).find(b => true);
+    //   console.log(parentObject);
+    //   if (id && (typeof id === 'string') && (/list-swipe/.test(id))) {
+    //     if (id === this.selfElement.id) {
+    //       this.result = (res.deltaX < 0);
+    //     }
+    //   }
+    // }
+  }
+
   clickItem = (a: any) => this.swClick.emit(a);
 
   action = (opt = '') => {
@@ -207,24 +221,8 @@ export class ItemListComponent implements AfterViewInit {
     }, 50);
 
 
-    const hammer = new Hammer(this.selfElement);
-    fromEvent(hammer, 'swipe').pipe(
-      takeWhile(() => this.alive))
-      .subscribe((res: any) => {
-        this.swService.closeAll(this.selfElement.id);
+    // const hammer = new Hammer(this.selfElement);
 
-        if (!this.disabledMark) {
-          // @ts-ignore
-          const {id} = Object.values(res.srcEvent.target.parentNode.children).find(b => true);
-          const parentObject = Object.values(res.srcEvent.target.parentNode.children).find(b => true);
-          console.log(parentObject);
-          if (id && (typeof id === 'string') && (/list-swipe/.test(id))) {
-            if (id === this.selfElement.id) {
-              this.result = (res.deltaX < 0);
-            }
-          }
-        }
-      });
   }
 
 }
