@@ -13,7 +13,7 @@ You can now have a swipe effect on your angle application, with which you can pl
 ----
 
 <p  align="center" style="display:flex;justify-content: space-between;width:100%;align-content: center;">
-<b>Examples</b>
+<b>Examples</b><br>
 
 <img height="400" src="https://i.imgur.com/qMXkbXm.gif"  alt="Preview 1" />
 <img height="400" src="https://i.imgur.com/LspDKT6.gif"  alt="Preview 2" />
