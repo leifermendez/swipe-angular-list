@@ -26,8 +26,6 @@ __[DEMO](https://stackblitz.com/edit/angular-ejzvpz)__
 <img height="400" src="https://i.imgur.com/orpXyIv.gif"  alt="Preview 3" />
 </p>
 
-  
-  
 
 ### Install
 
@@ -39,13 +37,9 @@ __[DEMO](https://stackblitz.com/edit/angular-ejzvpz)__
 
 ```typescript
 
-import {BrowserModule} from  '@angular/platform-browser';
-
+import { BrowserModule ,HammerModule } from '@angular/platform-browser';
 import {NgModule} from  '@angular/core';
-
 import {AppComponent} from  './app.component';
-
-  
 
 import {SwipeAngularListModule} from  'swipe-angular-list'; // <------ IMPORT
 
@@ -60,8 +54,8 @@ AppComponent
 imports: [
 
 BrowserModule,
-
-SwipeAngularListModule // <------ IMPORT
+HammerModule,  // < ----- ******************************** IMPORTANT ******************
+SwipeAngularListModule // < ----- ******************************** IMPORTANT ******************
 
 ],
 
