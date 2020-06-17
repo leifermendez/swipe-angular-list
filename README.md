@@ -1,21 +1,31 @@
 
+![](https://img.shields.io/npm/dy/swipe-angular-list.svg)
+![](https://img.shields.io/github/stars/leifermendez/swipe-angular-list)
+![](https://img.shields.io/github/license/leifermendez/swipe-angular-list)
 # Swiper List (Angular)
 
   
 
-You can now have a swipe effect on your angle application, with which you can place delete or edit options. Ideal for task list or contacts
+You can now have a swipe effect on your Angular application, with which you can place delete or edit options. Ideal for task list or contacts.
 
+__[DEMO](https://stackblitz.com/edit/angular-ejzvpz)__
+
+<p  align="center">
 <small>Preview</small>
-  ![](https://i.imgur.com/WGotbov.png)
----
-<p  align="center" style="display:flex;justify-content: space-between;width:100%">
+<br>
+<img src="https://i.imgur.com/WGotbov.png"  alt="Preview 1" />
+</p>
+
+----
+
+<p  align="center" style="display:flex;justify-content: space-between;width:100%;align-content: center;">
+<b>Examples</b><br>
+
 <img height="400" src="https://i.imgur.com/qMXkbXm.gif"  alt="Preview 1" />
 <img height="400" src="https://i.imgur.com/LspDKT6.gif"  alt="Preview 2" />
 <img height="400" src="https://i.imgur.com/orpXyIv.gif"  alt="Preview 3" />
 </p>
 
-  
-  
 
 ### Install
 
@@ -27,13 +37,9 @@ You can now have a swipe effect on your angle application, with which you can pl
 
 ```typescript
 
-import {BrowserModule} from  '@angular/platform-browser';
-
+import { BrowserModule ,HammerModule } from '@angular/platform-browser';
 import {NgModule} from  '@angular/core';
-
 import {AppComponent} from  './app.component';
-
-  
 
 import {SwipeAngularListModule} from  'swipe-angular-list'; // <------ IMPORT
 
@@ -48,8 +54,8 @@ AppComponent
 imports: [
 
 BrowserModule,
-
-SwipeAngularListModule // <------ IMPORT
+HammerModule,  // < ----- ******************************** IMPORTANT ******************
+SwipeAngularListModule // < ----- ******************************** IMPORTANT ******************
 
 ],
 
