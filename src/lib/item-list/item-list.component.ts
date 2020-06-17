@@ -114,7 +114,10 @@ export class ItemListComponent implements AfterViewInit {
 
   public swipeleft = (res:any) => {
     this.swService.closeAll(this.selfElement.id);
-    this.result = (res.deltaX < 0);
+        if (!this.disabledMark) {
+          this.result = (res.deltaX < 0);
+        }
+
 
     /**
      * Old CODE
