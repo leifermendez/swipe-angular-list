@@ -1,20 +1,14 @@
-import { NgModule } from '@angular/core';
-import { SwipeAngularListComponent } from './swipe-angular-list.component';
-import { ItemListComponent } from './item-list/item-list.component';
+import {NgModule} from '@angular/core';
+import {SwipeAngularListComponent} from './swipe-angular-list.component';
+import {ItemListComponent} from './item-list/item-list.component';
 import {CommonModule} from '@angular/common';
-import { HAMMER_GESTURE_CONFIG, HammerGestureConfig,  } from '@angular/platform-browser';
+import {HAMMER_GESTURE_CONFIG, HammerGestureConfig} from '@angular/platform-browser';
+
 export class HammerConfig extends HammerGestureConfig {
   overrides = {
-    pan: {
-        direction: 6
-    },
-    pinch: {
-        enable: false
-    },
-    rotate: {
-        enable: false
-    }
-};
+    pinch: {enable: false},
+    rotate: {enable: false}
+  };
 }
 
 @NgModule({
@@ -30,4 +24,5 @@ export class HammerConfig extends HammerGestureConfig {
   ],
   exports: [SwipeAngularListComponent, ItemListComponent]
 })
-export class SwipeAngularListModule { }
+export class SwipeAngularListModule {
+}

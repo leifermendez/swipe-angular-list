@@ -8,7 +8,7 @@
 
 You can now have a swipe effect on your Angular application, with which you can place delete or edit options. Ideal for task list or contacts.
 
-__[DEMO](https://stackblitz.com/edit/angular-ejzvpz)__
+__[VER DEMO](https://stackblitz.com/edit/angular-ejzvpz)__
 
 <p  align="center">
 <small>Preview</small>
