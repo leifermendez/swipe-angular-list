@@ -35,6 +35,21 @@ __[VER DEMO](https://stackblitz.com/edit/angular-ejzvpz)__
 
 ### Import
 
+__main.ts__
+
+Import `hammerjs`
+
+```typescript
+
+import './polyfills';
+import 'hammerjs'; // < ----- ********************************  IMPORT
+import { enableProdMode } from '@angular/core';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+
+```
+---
+__app.module.ts__
+
 ```typescript
 
 import { BrowserModule ,HammerModule } from '@angular/platform-browser';
