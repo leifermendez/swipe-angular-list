@@ -29,7 +29,7 @@ __[VER DEMO](https://stackblitz.com/edit/angular-ejzvpz)__
 
 ### Install
 
-`npm i swipe-angular-list --save`
+`npm i swipe-angular-list@latest --save`
 
   
 
