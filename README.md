@@ -52,37 +52,27 @@ __app.module.ts__
 
 ```typescript
 
-import { BrowserModule ,HammerModule } from '@angular/platform-browser';
-import {NgModule} from  '@angular/core';
-import {AppComponent} from  './app.component';
+import { BrowserModule, HammerModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
+import { AppComponent } from "./app.component";
 
-import {SwipeAngularListModule} from  'swipe-angular-list'; // <------ IMPORT
+import { SwipeAngularListModule } from "swipe-angular-list"; // <------ IMPORT
 
 @NgModule({
+  declarations: [AppComponent],
 
-declarations: [
+  imports: [
+    BrowserModule,
+    HammerModule, // < ----- ******************************** IMPORTANT ******************
+    SwipeAngularListModule, // < ----- ******************************** IMPORTANT ******************
+  ],
 
-AppComponent
+  providers: [],
 
-],
-
-imports: [
-
-BrowserModule,
-HammerModule,  // < ----- ******************************** IMPORTANT ******************
-SwipeAngularListModule // < ----- ******************************** IMPORTANT ******************
-
-],
-
-providers: [],
-
-bootstrap: [AppComponent]
-
+  bootstrap: [AppComponent],
 })
+export class AppModule {}
 
-export  class  AppModule {
-
-}
 
 ```
 
@@ -94,72 +84,59 @@ Use in your component
 
 ```typescript
 
-import { Component } from  '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
+  selector: "app-root",
 
-selector: 'app-root',
+  templateUrl: "./app.component.html",
 
-templateUrl: './app.component.html',
-
-styleUrls: ['./app.component.css']
-
+  styleUrls: ["./app.component.css"],
 })
+export class AppComponent {
+  title = "for-test";
 
-export  class  AppComponent {
+  list = [
+    {
+      id: 1,
 
-title =  'for-test';
+      title: "Realizar la tarea asignada!",
 
-list = [
+      subTitle: "9:00pm",
+    },
 
-{
+    {
+      id: 2,
 
-id: 1,
+      title: "Visitar al perro en casa de tu amiga",
 
-title: 'Realizar la tarea asignada!',
+      subTitle: "9:00pm",
+    },
 
-subTitle: '9:00pm'
+    {
+      id: 3,
 
-},
+      title: "Llamar al doctor",
 
-{
+      subTitle: "9:00pm",
+    },
 
-id: 2,
+    {
+      id: 4,
 
-title: 'Visitar al perro en casa de tu amiga',
+      title: "Buscar el auto en el taller",
 
-subTitle: '9:00pm'
+      subTitle: "9:00pm",
+    },
+  ];
 
-},
-
-{
-
-id: 3,
-
-title: 'Llamar al doctor',
-
-subTitle: '9:00pm'
-
-},
-
-{
-
-id: 4,
-
-title: 'Buscar el auto en el taller',
-
-subTitle: '9:00pm'
-
-}
-
-];
-
-action  = (a) => {
-
-console.log(a);
-
-};
-
+  action = (a) => {
+    console.log(a);
+  };
+  
+  swipeCallback = (a) => {
+    console.log('Callback Swipe', a);
+  }
 }
 
 ```
@@ -171,44 +148,34 @@ console.log(a);
 ```html
 
 <div>
+  <h3 style="text-align: center;">Task List</h3>
 
-  
-
-<h3  style="text-align: center">Task List</h3>
-
-<div> <sw-item-list  *ngFor="let item of list"
-
-[inside]="item"
-
-[item-class]="'list-custom'"
-
-[editTemplate]="editTemplate"
-
-[trashTemplate]="trashTemplate"
-
-(callback)="action($event)">
-
-</sw-item-list>
-
-</div>
-
+  <div>
+    <sw-item-list
+      *ngFor="let item of list"
+      [inside]="item"
+      [item-class]="'list-custom'"
+      [editTemplate]="editTemplate"
+      [trashTemplate]="trashTemplate"
+      (callback)="action($event)"
+      (swipeCb)="swipeCallback($event)"
+    >
+    </sw-item-list>
+  </div>
 </div>
 
 !<-- Defined yout template for icon button (edit)-->
 
-<ng-template  #editTemplate>
-
-<i  class="fas fa-edit"></i>
-
+<ng-template #editTemplate>
+  <i class="fas fa-edit"></i>
 </ng-template>
 
 !<-- Defined yout template for icon button (trash)-->
 
-<ng-template  #trashTemplate>
-
-<i  class="fas fa-trash"></i>
-
+<ng-template #trashTemplate>
+  <i class="fas fa-trash"></i>
 </ng-template>
+
 
 ```
 
@@ -219,15 +186,10 @@ console.log(a);
 __item__ structure defined :
 
 ``` text
-
 {
-
-id: 1,
-
-title: 'Realizar la tarea asignada!',
-
-subTitle: '9:00pm'
-
+   "id":1,
+   "title":"Realizar la tarea asignada!",
+   "subTitle":"9:00pm"
 }
 
 ```
@@ -262,32 +224,27 @@ __(callback)__ function callback click option
 
 __(swClick)__ click on item
 
+
+
+__(swipeCb)__ function callback swipe item
+
   
 
 ``` html
 
 <sw-item-list
-
-*ngFor="let item of list"
-
-[inside]="item"
-
-[item-class]="'list-custom'"
-
-[show-mark]="true"
-
-(swClick)="click(item)"
-
-[editTemplate]="editTemplate"
-
-[trashTemplate]="trashTemplate"
-
-[markTemplate]="defaultMark"
-
-[notMarkTemplate]="defaultNotMark"
-
-(callback)="action($event)">
-
+  *ngFor="let item of list"
+  [inside]="item"
+  [item-class]="'list-custom'"
+  [show-mark]="true"
+  (swClick)="click(item)"
+  (swipeCb)="swipeCallback($event)"
+  [editTemplate]="editTemplate"
+  [trashTemplate]="trashTemplate"
+  [markTemplate]="defaultMark"
+  [notMarkTemplate]="defaultNotMark"
+  (callback)="action($event)"
+>
 </sw-item-list>
 
 ```
@@ -296,93 +253,62 @@ __(swClick)__ click on item
 #### Example completed
 ```html 
 <div>
+  <h3 style="text-align: center;">TASK LIST</h3>
 
-<h3  style="text-align: center">TASK LIST</h3>
-
-<div>
-
-<sw-item-list
-
-*ngFor="let item of list"
-
-[inside]="item"
-
-[item-class]="'list-custom'"
-
-[show-mark]="false"
-
-[disable-mark]="item?.disable"
-
-(swClick)="click(item)"
-
-[editTemplate]="editTemplate"
-
-[trashTemplate]="trashTemplate"
-
-[markTemplate]="defaultMark"
-
-[customTemplate]="customTemplateSrc"
-
-[notMarkTemplate]="defaultNotMark"
-
-(callback)="action($event)">
-
-</sw-item-list>
-
-  
-
+  <div>
+    <sw-item-list
+      *ngFor="let item of list"
+      [inside]="item"
+      [item-class]="'list-custom'"
+      [show-mark]="false"
+      [disable-mark]="item?.disable"
+      (swClick)="click(item)"
+      [editTemplate]="editTemplate"
+      [trashTemplate]="trashTemplate"
+      [markTemplate]="defaultMark"
+      [customTemplate]="customTemplateSrc"
+      [notMarkTemplate]="defaultNotMark"
+      (callback)="action($event)"
+    >
+    </sw-item-list>
+  </div>
 </div>
 
-</div>
-
-<ng-template  #editTemplate>
-
-<i  class="fas fa-edit"></i>
-
+<ng-template #editTemplate>
+  <i class="fas fa-edit"></i>
 </ng-template>
 
-<ng-template  #trashTemplate>
-
-<i  class="fas fa-trash"></i>
-
+<ng-template #trashTemplate>
+  <i class="fas fa-trash"></i>
 </ng-template>
 
-<ng-template  #defaultMark>
-
-<i  class="far fa-check-circle"></i>
-
+<ng-template #defaultMark>
+  <i class="far fa-check-circle"></i>
 </ng-template>
 
-<ng-template  #defaultNotMark>
-
-<i  class="far fa-circle"></i>
-
+<ng-template #defaultNotMark>
+  <i class="far fa-circle"></i>
 </ng-template>
 
-  
-  
+<ng-template #customTemplateSrc let-item="item" let-id="id">
+  <div style="display: flex;">
+    <div style="padding-right: 10px;">
+      <img
+        style="width: 60px; height: 60px; border-radius: 60px;"
+        [src]="'https://api.adorable.io/avatars/400/' + id + '.png'"
+        alt=""
+      />
+    </div>
 
-<ng-template  #customTemplateSrc  let-item='item'  let-id='id'>
+    <div>
+      <h3 style="margin-top: 0; margin-bottom: 0;">Lorem, ipsum dolor.</h3>
 
-<div  style="display: flex;">
-
-<div  style="padding-right: 10px;">
-
-<img  style="width:60px;height:60px;border-radius:60px;"
-
-[src]="'https://api.adorable.io/avatars/400/'+id+'.png'"  alt="">
-
-</div>
-
-<div>
-
-<h3  style="margin-top: 0;margin-bottom: 0;">Lorem, ipsum dolor.</h3>
-
-<small  style="color:gray;font-weight:500;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, optio.</small>
-
-</div>
-
-</div>
-
+      <small style="color: gray; font-weight: 500;"
+        >Lorem ipsum dolor sit amet consectetur adipisicing elit. Non,
+        optio.</small
+      >
+    </div>
+  </div>
 </ng-template>
+
 ```
