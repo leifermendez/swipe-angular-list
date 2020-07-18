@@ -75,7 +75,13 @@ export class AppModule {}
 
 
 ```
-
+__style.css__
+> The scroll doesn't work on mobile devices?
+```css
+* {
+  touch-action: pan-y !important;
+}
+```
   
 
 ### Use
