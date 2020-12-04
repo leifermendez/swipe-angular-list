@@ -2,9 +2,7 @@
 ![](https://img.shields.io/npm/dy/swipe-angular-list.svg)
 ![](https://img.shields.io/github/stars/leifermendez/swipe-angular-list)
 ![](https://img.shields.io/github/license/leifermendez/swipe-angular-list)
-# Swiper List (Angular)
-
-  
+# Angular Swiper List (swipe-angular-list)
 
 You can now have a swipe effect on your Angular application, with which you can place delete or edit options. Ideal for task list or contacts.
 
@@ -31,8 +29,6 @@ __[VER DEMO](https://stackblitz.com/edit/angular-ejzvpz)__
 
 `npm i swipe-angular-list@latest --save`
 
-  
-
 ### Import
 
 __main.ts__
@@ -47,7 +43,7 @@ import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 ```
----
+
 __app.module.ts__
 
 ```typescript
@@ -105,35 +101,24 @@ export class AppComponent {
   list = [
     {
       id: 1,
-
       title: "Realizar la tarea asignada!",
-
       subTitle: "9:00pm",
     },
-
     {
       id: 2,
-
       title: "Visitar al perro en casa de tu amiga",
-
       subTitle: "9:00pm",
     },
-
     {
       id: 3,
-
       title: "Llamar al doctor",
-
       subTitle: "9:00pm",
     },
-
     {
       id: 4,
-
       title: "Buscar el auto en el taller",
-
       subTitle: "9:00pm",
-    },
+    }
   ];
 
   action = (a) => {
@@ -146,8 +131,6 @@ export class AppComponent {
 }
 
 ```
-
-  
 
 ### Template
 
@@ -164,8 +147,7 @@ export class AppComponent {
       [editTemplate]="editTemplate"
       [trashTemplate]="trashTemplate"
       (callback)="action($event)"
-      (swipeCb)="swipeCallback($event)"
-    >
+      (swipeCb)="swipeCallback($event)">
     </sw-item-list>
   </div>
 </div>
@@ -182,12 +164,9 @@ export class AppComponent {
   <i class="fas fa-trash"></i>
 </ng-template>
 
-
 ```
 
 ### Options
-
-  
 
 __item__ structure defined :
 
@@ -199,42 +178,23 @@ __item__ structure defined :
 }
 
 ```
-
-__item-class__ name of style class custom.
-
+### Inputs
+| Name   |      Default      |  Description |
+|:----------:|:-------------:|:------:|
+| item-class |  (string) '' | name of style class custom |
+| show-mark |   (boolean) true   |   boolean show icon done or not |
+| editTemplate | (TemplateRef) or null |  template for edit button |
+| trashTemplate | (TemplateRef) or null | template for trash button | 
+| markTemplate | (TemplateRef)  | template for icon check template | 
+| notMarkTemplat | (TemplateRef) | template for icon not check template |
   
+### Output
+| Name   |      Default      |  Description |
+|:----------:|:-------------:|:------:|
+| (callback) |  (function) | function callback click option |
+| (swClick) |  (function) | click on item |
+| (swipeCb) |  (function) | function callback swipe item | 
 
-__show-mark__ boolean show icon done or not
-
-  
-
-__editTemplate__ template for edit button
-
-  
-
-__trashTemplate__ template for trash button
-
-  
-
-__markTemplate__ template for icon check template
-
-  
-
-__notMarkTemplate__ template for icon not check template
-
-  
-
-__(callback)__ function callback click option
-
-  
-
-__(swClick)__ click on item
-
-
-
-__(swipeCb)__ function callback swipe item
-
-  
 
 ``` html
 
@@ -260,7 +220,6 @@ __(swipeCb)__ function callback swipe item
 ```html 
 <div>
   <h3 style="text-align: center;">TASK LIST</h3>
-
   <div>
     <sw-item-list
       *ngFor="let item of list"
@@ -274,8 +233,7 @@ __(swipeCb)__ function callback swipe item
       [markTemplate]="defaultMark"
       [customTemplate]="customTemplateSrc"
       [notMarkTemplate]="defaultNotMark"
-      (callback)="action($event)"
-    >
+      (callback)="action($event)">
     </sw-item-list>
   </div>
 </div>
@@ -302,17 +260,13 @@ __(swipeCb)__ function callback swipe item
       <img
         style="width: 60px; height: 60px; border-radius: 60px;"
         [src]="'https://api.adorable.io/avatars/400/' + id + '.png'"
-        alt=""
-      />
+        alt=""/>
     </div>
-
     <div>
       <h3 style="margin-top: 0; margin-bottom: 0;">Lorem, ipsum dolor.</h3>
-
-      <small style="color: gray; font-weight: 500;"
-        >Lorem ipsum dolor sit amet consectetur adipisicing elit. Non,
-        optio.</small
-      >
+      <small style="color: gray; font-weight: 500;">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Non,optio.
+      </small>
     </div>
   </div>
 </ng-template>
